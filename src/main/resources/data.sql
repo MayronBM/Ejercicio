@@ -1,0 +1,1 @@
+insert into usuario(id,nombre,email,clave) values('fasdfasdf','test','test','test')

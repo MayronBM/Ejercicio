@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "d41ef21b-9083-4b98-ab2e-95dac9667897",
+		"name": "ejercicio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4583478"
+	},
+	"item": [
+		{
+			"name": "guardar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\" : \"Manuel Ramirez\" ,\r\n\"email\" : \"username@domaincom.sd\" ,\r\n\"password\" : \"User1234678*\" ,\r\n\"phones\" : [\r\n{\r\n\"number\" : \"12345678\" ,\r\n\"citycode\" : \"12\" ,\r\n\"contrycode\" : \"12\"\r\n}\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/api/v1/usuario/guardar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"api",
+						"v1",
+						"usuario",
+						"guardar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test\",\r\n    \"password\":\"testa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/api/v1/usuario/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"api",
+						"v1",
+						"usuario",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "libre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/auth/api/v1/blog/unrestricted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"api",
+						"v1",
+						"blog",
+						"unrestricted"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "seguro",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW51ZWxAcmFtaXJlei5vcmciLCJpYXQiOjE2NzQ1MzEyNzAsImV4cCI6MTY3NDUzMTg3MH0.LFmlwq5F7ck44ZBVYtNNjn6oXfmqt_IE_PqZ8H4LaEg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/auth/api/v1/blog/restricted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"api",
+						"v1",
+						"blog",
+						"restricted"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
