@@ -37,7 +37,9 @@ public class UsuarioImpl implements UsuarioServicio {
             }
             usuario.setActivo(true);
             Usuario finalUsuario = usuario;
-            usuario.getTelefonos().forEach(telefono -> telefono.setUsuario(finalUsuario));
+            if (usuario.getTelefonos() != null) {
+                usuario.getTelefonos().forEach(telefono -> telefono.setUsuario(finalUsuario));
+            }
 
             usuario = usuarioRepo.save(usuario);
         } catch (DataIntegrityViolationException | ConstraintViolationException e) {
