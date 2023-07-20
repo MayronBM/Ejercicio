@@ -1,7 +1,7 @@
 package ejercicio.persistencia.entidad;
 
 import ejercicio.web.util.validacion.email.Password;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,7 +15,11 @@ import java.util.UUID;
                 name = "UK_POST_EMAIL",
                 columnNames = "email"
         ))
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Usuario {
     @Id
     @GeneratedValue(generator = "UUID")

@@ -48,21 +48,25 @@ dependencies {
     compileOnly "org.projectlombok:lombok:1.18.24"
     annotationProcessor "org.projectlombok:lombok:1.18.24"
     testCompileOnly "org.projectlombok:lombok:1.18.24"
-    testAnnotationProcessor "org.projectlombok:lombok:1.18.24"
+//    testAnnotationProcessor "org.projectlombok:lombok:1.18.24"
 
     compileOnly "org.mapstruct:mapstruct:1.5.1.Final"
     testCompileOnly "org.mapstruct:mapstruct:1.5.1.Final"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
-    testAnnotationProcessor "org.mapstruct:mapstruct- processor:1.5.1.Final"
+//    testAnnotationProcessor "org.mapstruct:mapstruct- processor:1.5.1.Final"
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
-testing {
-    suites {
-        // Configure the built-in test suite
-        test {
-            // Use JUnit4 test framework
-            useJUnit('4.13.2')
-        }
-    }
+test {
+    useJUnitPlatform()
 }
+
+//testing {
+//    suites {
+//        // Configure the built-in test suite
+//        test {
+//            // Use JUnit4 test framework
+//            useJUnit('4.13.2')
+//        }
+//    }
+//}
