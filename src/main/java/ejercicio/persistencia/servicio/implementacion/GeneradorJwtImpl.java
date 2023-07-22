@@ -18,10 +18,13 @@ public class GeneradorJwtImpl implements GeneradorJwt {
     @Value("${jwt.secret}")
     private String secret;
 
+    @Value("${token.tiempo}")
+    private int min;
+
     @Override
     public Token crearToken(Usuario usuario) {
         String jwtToken = "";
-        Date expirationDate = new Date((new Date()).getTime() + 10 * 60 * 1000);
+        Date expirationDate = new Date((new Date()).getTime() + min * 60 * 1000);
         jwtToken = Jwts.builder()
                 .setSubject(usuario.getEmail())
                 .setIssuedAt(new Date())
