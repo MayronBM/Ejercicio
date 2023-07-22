@@ -12,7 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,43 +38,30 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/guardar")
-    public ResponseEntity<?> postUser(@RequestBody UserDto userDto) throws Exception {
-        try {
-
-            if (!EmailValidator.getInstance()
-                    .isValid(userDto.getEmail())) {
-                throw new UsuarioException("Debe agregar un correo válido.");
-            }
-
-            Usuario usuario = userMapper.convertir(userDto);
-            usuario = usuarioServicio.guardar(usuario);
-            Token token = generadorJwt.crearToken(usuario);
-
-            return new ResponseEntity<>(userMapper.convertirGuardar(usuario, token), HttpStatus.CREATED);
-        } catch (UsuarioException e) {
-            throw new UsuarioException(e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+    public ResponseEntity<?> postUser(@RequestBody UserDto userDto) {
+        if (!EmailValidator.getInstance()
+                .isValid(userDto.getEmail())) {
+            throw new UsuarioException("Debe agregar un correo válido.");
         }
+
+        Usuario usuario = userMapper.convertir(userDto);
+        usuario = usuarioServicio.guardar(usuario);
+        Token token = generadorJwt.crearToken(usuario);
+
+        return new ResponseEntity<>(userMapper.convertirGuardar(usuario, token), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) throws Exception {
-        try {
-            Usuario usuario = userMapper.convertir(userDto);
+        Usuario usuario = userMapper.convertir(userDto);
 
-            if (StringUtils.isEmpty(usuario.getEmail()) || StringUtils.isEmpty(usuario.getClave())) {
-                throw new UsuarioException("Los valores no pueden ser vacíos");
-            }
-
-            return usuarioServicio.obtenerUsuarioPorEmailClave(usuario.getEmail(), usuario.getClave())
-                    .map(usuarioBd -> new ResponseEntity<>(generadorJwt.crearToken(usuario), HttpStatus.OK))
-                    .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
-
-        } catch (UsuarioException e) {
-            throw new UsuarioException(e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        if (StringUtils.isEmpty(usuario.getEmail()) || StringUtils.isEmpty(usuario.getClave())) {
+            throw new UsuarioException("Los valores no pueden ser vacíos");
         }
+
+        return usuarioServicio.obtenerUsuarioPorEmailClave(usuario.getEmail(), usuario.getClave())
+                .map(usuarioBd -> new ResponseEntity<>(generadorJwt.crearToken(usuario), HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
+
     }
 }
