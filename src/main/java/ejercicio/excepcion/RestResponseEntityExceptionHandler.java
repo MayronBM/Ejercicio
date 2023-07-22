@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ValidationException;
 import java.nio.file.AccessDeniedException;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler
@@ -29,18 +33,33 @@ public class RestResponseEntityExceptionHandler
 
     @ExceptionHandler({DataIntegrityViolationException.class, ConstraintViolationException.class})
     public ResponseEntity<Object> handleDataIntegrityViolationException(
-            Exception ex, HttpServletRequest request) {
+            Exception e, HttpServletRequest request) {
+        String value = "";
+        if (e.getCause() != null && e.getCause().getCause() != null
+                && e.getCause().getCause().getMessage().contains("UK_POST_EMAIL")) {
+            value = "El correo ya existe.";
+        } else {
+            value = "El valor agregado ya eiste.";
+        }
 
-        ExceptionResponse error = new ExceptionResponse(ex);
+        ExceptionResponse error = new ExceptionResponse(e);
+        error.setMensaje(value);
 
         return new ResponseEntity<Object>(error, new HttpHeaders(), HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler({javax.validation.ValidationException.class})
+    @ExceptionHandler({ValidationException.class})
     public ResponseEntity<Object> handleTypeMismatchException(
-            Exception ex, HttpServletRequest request) {
+            Exception e, HttpServletRequest request) {
+        String value = "";
+        Set<ConstraintViolation<?>> constraintViolations
+                = ((javax.validation.ConstraintViolationException) e).getConstraintViolations();
+        ConstraintViolation<?>[] val = constraintViolations.toArray(new ConstraintViolation[constraintViolations.size()]);
 
-        ExceptionResponse error = new ExceptionResponse(ex);
+        value = val[0].getMessageTemplate();
+
+        ExceptionResponse error = new ExceptionResponse(e);
+        error.setMensaje(value);
 
         return new ResponseEntity<Object>(error, new HttpHeaders(), HttpStatus.FORBIDDEN);
     }

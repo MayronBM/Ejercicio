@@ -13,6 +13,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -29,32 +30,19 @@ public class UsuarioImpl implements UsuarioServicio {
 
     @Override
     public Usuario guardar(Usuario usuario) {
-        try {
-            if (usuario.getId() == null) {
-                usuario.setCreado(new Date());
-            } else {
-                usuario.setModificado(new Date());
-            }
-            usuario.setActivo(true);
-            Usuario finalUsuario = usuario;
-            usuario.getTelefonos().forEach(telefono -> telefono.setUsuario(finalUsuario));
 
-            usuario = usuarioRepo.save(usuario);
-        } catch (DataIntegrityViolationException | ConstraintViolationException e) {
-            if (e.getCause() != null && e.getCause().getCause() != null
-                    && e.getCause().getCause().getMessage().contains("UK_POST_EMAIL")) {
-                throw new DataIntegrityViolationException(MessageFormat
-                        .format("El correo {0} ya existe.", usuario.getEmail()));
-            }
-            throw new DataIntegrityViolationException("error de duplicado");
-        } catch (ValidationException e) {
-            Set<ConstraintViolation<?>> constraintViolations
-                    = ((javax.validation.ConstraintViolationException) e).getConstraintViolations();
-            ConstraintViolation<?>[] val = constraintViolations.toArray(new ConstraintViolation[constraintViolations.size()]);
-            throw new DataIntegrityViolationException(val[0].getMessageTemplate());
-        } catch (Exception e) {
-            throw new UsuarioException("Error inesperado.");
+        if (usuario.getId() == null) {
+            usuario.setCreado(LocalDateTime.now());
+        } else {
+            usuario.setModificado(LocalDateTime.now());
         }
+        usuario.setActivo(true);
+        Usuario finalUsuario = usuario;
+        if (usuario.getTelefonos() != null) {
+            usuario.getTelefonos().forEach(telefono -> telefono.setUsuario(finalUsuario));
+        }
+
+        usuario = usuarioRepo.save(usuario);
         return usuario;
     }
 

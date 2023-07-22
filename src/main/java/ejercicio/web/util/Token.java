@@ -1,8 +1,10 @@
 package ejercicio.web.util;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Token {
     private String token;
 

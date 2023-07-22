@@ -1,10 +1,11 @@
 package ejercicio.persistencia.entidad;
 
 import ejercicio.web.util.validacion.email.Password;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +16,11 @@ import java.util.UUID;
                 name = "UK_POST_EMAIL",
                 columnNames = "email"
         ))
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Usuario {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -28,8 +33,8 @@ public class Usuario {
     private String email;
     @Password
     private String clave;
-    private Date creado;
-    private Date modificado;
+    private LocalDateTime creado;
+    private LocalDateTime modificado;
     private Boolean activo;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Telefono> telefonos;

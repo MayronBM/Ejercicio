@@ -1,12 +1,16 @@
 package ejercicio.persistencia.entidad;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "telefono")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Telefono {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
