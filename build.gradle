@@ -43,6 +43,8 @@ dependencies {
 
     implementation 'commons-validator:commons-validator:1.7'
     implementation 'org.passay:passay:1.6.2'
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 
 
     compileOnly "org.projectlombok:lombok:1.18.24"
@@ -61,13 +63,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-//testing {
-//    suites {
-//        // Configure the built-in test suite
-//        test {
-//            // Use JUnit4 test framework
-//            useJUnit('4.13.2')
-//        }
-//    }
-//}
