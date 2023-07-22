@@ -116,4 +116,35 @@ public class UsuarioControladorTest {
                 .andExpect(jsonPath("$.token", is(userDto.getToken())));
 
     }
+
+    @DisplayName("Login un usuario email null.")
+    @Test
+    void loginEmailNull() throws Exception {
+
+        Usuario usuario = Usuario.builder()
+                .clave("ClaveTemporal123*")
+                .build();
+        Token token = new Token("1234");
+        UserDto userDto = UserDto.builder()
+                .name("prueba")
+                .password("ClaveTemporal123*")
+                .token(token.getToken())
+                .build();
+
+        given(userMapper.convertir(any(UserDto.class))).willReturn(usuario);
+
+        given(usuarioServicio.obtenerUsuarioPorEmailClave(userDto.getEmail(), userDto.getPassword())).willReturn(Optional.of(usuario));
+
+        given(generadorJwt.crearToken(any(Usuario.class))).willReturn(token);
+
+
+        ResultActions resultActions = mockMvc.perform(post("/api/v1/usuario/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(userDto)));
+
+        resultActions.andDo(print())
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.mensaje", is("Los valores no pueden ser vacíos")));
+
+    }
 }
