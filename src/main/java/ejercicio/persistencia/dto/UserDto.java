@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -20,8 +21,8 @@ public class UserDto implements Serializable {
     private String email;
     private String password;
     private List<PhoneDto> phones;
-    private Date created;
-    private Date modified;
+    private LocalDateTime created;
+    private LocalDateTime modified;
     private Boolean isactive;
     private String token;
 }

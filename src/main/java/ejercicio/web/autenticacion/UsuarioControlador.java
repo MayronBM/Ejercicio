@@ -8,6 +8,8 @@ import ejercicio.persistencia.servicio.servicio.GeneradorJwt;
 import ejercicio.persistencia.servicio.servicio.UsuarioServicio;
 import ejercicio.web.util.Token;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/usuario")
-@Data
+@Getter
+@Setter
 public class UsuarioControlador {
 
     private UsuarioServicio usuarioServicio;

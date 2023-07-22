@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -32,8 +33,8 @@ public class Usuario {
     private String email;
     @Password
     private String clave;
-    private Date creado;
-    private Date modificado;
+    private LocalDateTime creado;
+    private LocalDateTime modificado;
     private Boolean activo;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Telefono> telefonos;

@@ -13,6 +13,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -31,9 +32,9 @@ public class UsuarioImpl implements UsuarioServicio {
     public Usuario guardar(Usuario usuario) {
         try {
             if (usuario.getId() == null) {
-                usuario.setCreado(new Date());
+                usuario.setCreado(LocalDateTime.now());
             } else {
-                usuario.setModificado(new Date());
+                usuario.setModificado(LocalDateTime.now());
             }
             usuario.setActivo(true);
             Usuario finalUsuario = usuario;
