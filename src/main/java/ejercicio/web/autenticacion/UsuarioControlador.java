@@ -57,6 +57,7 @@ public class UsuarioControlador {
     public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) throws Exception {
         try {
             Usuario usuario = userMapper.convertir(userDto);
+
             if (StringUtils.isEmpty(usuario.getEmail()) || StringUtils.isEmpty(usuario.getClave())) {
                 throw new UsuarioException("Los valores no pueden ser vacíos");
             }
