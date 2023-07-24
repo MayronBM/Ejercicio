@@ -6,13 +6,13 @@ server:
     error:
         include-message: always
     servlet:
-        context-path: /auth
+        context-path: '/auth/${VERSION:v1}'
 spring:
     datasource:
         driverClassName: org.h2.Driver
-        password: 1234
+        password: '${PASSWORD_DB:1234}'
         url: jdbc:h2:mem:testdb
-        username: sa
+        username: '${USER_DB:sa}'
     h2:
         console:
             enabled: true
