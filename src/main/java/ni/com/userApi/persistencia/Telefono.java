@@ -1,8 +1,7 @@
 package ni.com.userApi.persistencia;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "telefono")

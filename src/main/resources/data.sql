@@ -1,1 +1,1 @@
-insert into usuario(id,nombre,email,clave) values('fasdfasdf','test','test','test');
+insert into usuario(id,nombre,email,clave) values('550e8400-e29b-41d4-a716-446655440000','test','test','test');
