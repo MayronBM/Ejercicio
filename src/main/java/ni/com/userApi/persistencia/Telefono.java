@@ -12,13 +12,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 public class Telefono {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String numero;
-    private Integer codigoCiudad;
-    private Integer codigoPais;
-    @ManyToOne
-    @JoinColumn(name = "usuario")
-    private Usuario usuario;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+
+  private String numero;
+  private Integer codigoCiudad;
+  private Integer codigoPais;
+
+  @ManyToOne
+  @JoinColumn(name = "usuario")
+  private Usuario usuario;
 }

@@ -15,13 +15,13 @@ import java.util.UUID;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto implements Serializable {
-    private UUID id;
-    private String name;
-    private String email;
-    private String password;
-    private List<PhoneDto> phones;
-    private LocalDateTime created;
-    private LocalDateTime modified;
-    private Boolean isactive;
-    private String token;
+  private UUID id;
+  private String name;
+  private String email;
+  private String password;
+  private List<PhoneDto> phones;
+  private LocalDateTime created;
+  private LocalDateTime modified;
+  private Boolean isactive;
+  private String token;
 }

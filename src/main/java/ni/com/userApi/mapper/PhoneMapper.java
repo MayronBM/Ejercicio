@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public interface PhoneMapper {
-    @Mapping(target = "number", source = "numero")
-    @Mapping(target = "citycode", source = "codigoCiudad")
-    @Mapping(target = "contrycode", source = "codigoPais")
-    PhoneDto convertir(Telefono telefono);
+  @Mapping(target = "number", source = "numero")
+  @Mapping(target = "citycode", source = "codigoCiudad")
+  @Mapping(target = "contrycode", source = "codigoPais")
+  PhoneDto convertir(Telefono telefono);
 
-    @InheritInverseConfiguration
-    Telefono convertir(PhoneDto phoneDto);
+  @InheritInverseConfiguration
+  Telefono convertir(PhoneDto phoneDto);
 }

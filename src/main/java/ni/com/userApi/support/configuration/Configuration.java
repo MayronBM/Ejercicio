@@ -10,14 +10,14 @@ import org.springframework.core.annotation.Order;
 @Order(1)
 public class Configuration {
 
-    @Value("${jwt.secret}")
-    private String secret;
+  @Value("${jwt.secret}")
+  private String secret;
 
-    @Bean
-    public FilterRegistrationBean jwtFilter() {
-        FilterRegistrationBean filter = new FilterRegistrationBean();
-        filter.setFilter(new Filter(secret));
-        filter.addUrlPatterns("/blog/restricted");
-        return filter;
-    }
+  @Bean
+  public FilterRegistrationBean jwtFilter() {
+    FilterRegistrationBean filter = new FilterRegistrationBean();
+    filter.setFilter(new Filter(secret));
+    filter.addUrlPatterns("/blog/restricted");
+    return filter;
+  }
 }

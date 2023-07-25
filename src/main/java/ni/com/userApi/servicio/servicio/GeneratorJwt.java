@@ -4,5 +4,5 @@ import ni.com.userApi.persistencia.Usuario;
 import ni.com.userApi.dto.Token;
 
 public interface GeneratorJwt {
-    Token crearToken(Usuario usuario);
+  Token crearToken(Usuario usuario);
 }

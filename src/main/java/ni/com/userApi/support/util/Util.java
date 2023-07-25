@@ -6,12 +6,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class Util {
 
-    public static String convertObjectToJson(Object object) throws JsonProcessingException {
-        if (object == null) {
-            return null;
-        }
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        return mapper.writeValueAsString(object);
+  public static String convertObjectToJson(Object object) throws JsonProcessingException {
+    if (object == null) {
+      return null;
     }
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.registerModule(new JavaTimeModule());
+    return mapper.writeValueAsString(object);
+  }
 }

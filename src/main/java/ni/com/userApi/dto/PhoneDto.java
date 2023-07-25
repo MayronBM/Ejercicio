@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class PhoneDto implements Serializable {
-    private String number;
-    private Integer citycode;
-    private Integer contrycode;
+  private String number;
+  private Integer citycode;
+  private Integer contrycode;
 }

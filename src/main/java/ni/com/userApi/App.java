@@ -14,13 +14,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 public class App {
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(App.class, args);
+  }
 
-    @Bean
-    public Docket usuarioApi() {
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                    .apis(RequestHandlerSelectors.basePackage("ni.com.userApi.controller.authentication")).build();
-    }
+  @Bean
+  public Docket usuarioApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("ni.com.userApi.controller.authentication"))
+        .build();
+  }
 }

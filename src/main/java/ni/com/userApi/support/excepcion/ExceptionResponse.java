@@ -5,25 +5,40 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class ExceptionResponse implements Serializable {
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime fecha;
-    private String mensaje;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+  private LocalDateTime fecha;
 
-    public ExceptionResponse() {
-    }
+  private String mensaje;
 
-    public ExceptionResponse(String mensaje) {
-        this.mensaje = mensaje;
-        fecha = LocalDateTime.now();
-    }
+  public ExceptionResponse() {}
 
-    public ExceptionResponse(Exception ex) {
-        mensaje = ex.getMessage();
-        fecha = LocalDateTime.now();
+  public ExceptionResponse(String mensaje) {
+    this.mensaje = mensaje;
+    fecha = LocalDateTime.now();
+  }
+
+  public ExceptionResponse(Exception ex) {
+    mensaje = ex.getMessage();
+    fecha = LocalDateTime.now();
+  }
+
+  public ExceptionResponse(SQLException ex) {
+    mensaje = mensajeSqlException(ex);
+    fecha = LocalDateTime.now();
+  }
+
+  private String mensajeSqlException(SQLException ex) {
+    String msg = "Error code: %s, Cause: %s";
+    if (ex.getErrorCode() == 23505 && ex.getMessage().contains("UK_POST_EMAIL")) {
+      return "El email se encuentra asignado a otro usuario.";
+    } else {
+      return String.format(msg, ex.getErrorCode(), ex.getMessage());
     }
+  }
 }

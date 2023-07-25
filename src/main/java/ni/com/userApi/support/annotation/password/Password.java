@@ -10,10 +10,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = PasswordConstraintsValidator.class)
 public @interface Password {
 
-    String message() default "Clave Inválida!";
+  String message() default "Clave Inválida!";
 
-    Class<?>[] groups() default {};
+  Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
-
+  Class<? extends Payload>[] payload() default {};
 }

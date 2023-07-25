@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("blog")
 public class BlogController {
-    @GetMapping("/unrestricted")
-    public ResponseEntity<?> getMessage() {
-        return new ResponseEntity<>("Hai this is a normal message..", HttpStatus.OK);
-    }
+  @GetMapping("/unrestricted")
+  public ResponseEntity<?> getMessage() {
+    return new ResponseEntity<>("Hai this is a normal message..", HttpStatus.OK);
+  }
 
-    @GetMapping("/restricted")
-    public ResponseEntity<?> getRestrictedMessage() {
-        return new ResponseEntity<>("This is a restricted message", HttpStatus.OK);
-    }
+  @GetMapping("/restricted")
+  public ResponseEntity<?> getRestrictedMessage() {
+    return new ResponseEntity<>("This is a restricted message", HttpStatus.OK);
+  }
 }
