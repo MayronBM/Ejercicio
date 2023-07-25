@@ -1,15 +1,17 @@
 package ni.com.userApi.support.security;
 
-import ni.com.userApi.support.excepcion.ExceptionResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import ni.com.userApi.support.excepcion.ExceptionResponse;
 import ni.com.userApi.support.util.Util;
 import org.springframework.web.filter.GenericFilterBean;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class Filter extends GenericFilterBean {
 
