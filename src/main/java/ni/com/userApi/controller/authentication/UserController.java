@@ -1,5 +1,6 @@
 package ni.com.userApi.controller.authentication;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.Setter;
 import ni.com.userApi.dto.Token;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("usuario")
 @Getter
 @Setter
+@Tag(name = "User", description = "Registro y Login de usuarrios")
 public class UserController {
 
   private UserService userService;
