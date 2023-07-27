@@ -1,13 +1,12 @@
 package ni.com.userApi.persistencia;
 
 import jakarta.persistence.*;
-import ni.com.userApi.support.annotation.password.Password;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.*;
+import ni.com.userApi.support.annotation.password.Password;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(

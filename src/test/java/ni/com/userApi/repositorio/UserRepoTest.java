@@ -1,5 +1,8 @@
-package ejercicio.persistencia.repositorio;
+package ni.com.userApi.repositorio;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.util.Optional;
 import ni.com.userApi.persistencia.Usuario;
 import ni.com.userApi.repository.UserRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,10 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

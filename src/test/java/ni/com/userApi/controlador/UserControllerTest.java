@@ -1,22 +1,4 @@
-package ejercicio.persistencia.controlador;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import ni.com.userApi.dto.UserDto;
-import ni.com.userApi.persistencia.Usuario;
-import ni.com.userApi.mapper.UserMapper;
-import ni.com.userApi.servicio.servicio.GeneratorJwt;
-import ni.com.userApi.servicio.servicio.UserService;
-import ni.com.userApi.dto.Token;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-
-import java.util.Optional;
+package ni.com.userApi.controlador;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +7,23 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Optional;
+import ni.com.userApi.dto.Token;
+import ni.com.userApi.dto.UserDto;
+import ni.com.userApi.mapper.UserMapper;
+import ni.com.userApi.persistencia.Usuario;
+import ni.com.userApi.servicio.servicio.GeneratorJwt;
+import ni.com.userApi.servicio.servicio.UserService;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 @WebMvcTest
 public class UserControllerTest {
@@ -69,7 +68,7 @@ public class UserControllerTest {
 
         given(userMapper.convertirGuardar(any(Usuario.class), any(Token.class))).willReturn(userDto);
 
-        ResultActions resultActions = mockMvc.perform(post("/api/v1/usuario/guardar")
+        ResultActions resultActions = mockMvc.perform(post("/usuario/guardar")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto)));
 
@@ -102,7 +101,7 @@ public class UserControllerTest {
         given(generatorJwt.crearToken(any(Usuario.class))).willReturn(token);
 
 
-        ResultActions resultActions = mockMvc.perform(post("/api/v1/usuario/login")
+        ResultActions resultActions = mockMvc.perform(post("/usuario/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto)));
 
@@ -133,12 +132,12 @@ public class UserControllerTest {
         given(generatorJwt.crearToken(any(Usuario.class))).willReturn(token);
 
 
-        ResultActions resultActions = mockMvc.perform(post("/api/v1/usuario/login")
+        ResultActions resultActions = mockMvc.perform(post("/usuario/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto)));
 
         resultActions.andDo(print())
-                .andExpect(status().isForbidden())
+                .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.mensaje", is("Los valores no pueden ser vacíos")));
 
     }

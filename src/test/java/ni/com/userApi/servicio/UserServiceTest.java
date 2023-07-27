@@ -1,5 +1,11 @@
-package ejercicio.persistencia.servicio;
+package ni.com.userApi.servicio;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import ni.com.userApi.persistencia.Telefono;
 import ni.com.userApi.persistencia.Usuario;
 import ni.com.userApi.repository.UserRepo;
@@ -11,13 +17,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {

@@ -1,12 +1,11 @@
 package ni.com.userApi.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.*;
 
 @Getter
 @Setter

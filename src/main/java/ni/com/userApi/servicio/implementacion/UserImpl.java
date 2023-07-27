@@ -1,14 +1,13 @@
 package ni.com.userApi.servicio.implementacion;
 
-import ni.com.userApi.support.excepcion.UserException;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import ni.com.userApi.persistencia.Usuario;
 import ni.com.userApi.repository.UserRepo;
 import ni.com.userApi.servicio.servicio.UserService;
+import ni.com.userApi.support.excepcion.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class UserImpl implements UserService {

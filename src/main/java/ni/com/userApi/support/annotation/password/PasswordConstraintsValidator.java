@@ -2,9 +2,8 @@ package ni.com.userApi.support.annotation.password;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.passay.*;
-
 import java.util.Arrays;
+import org.passay.*;
 
 public class PasswordConstraintsValidator implements ConstraintValidator<Password, String> {
 

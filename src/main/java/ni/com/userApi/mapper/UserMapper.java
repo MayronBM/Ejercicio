@@ -1,8 +1,8 @@
 package ni.com.userApi.mapper;
 
+import ni.com.userApi.dto.Token;
 import ni.com.userApi.dto.UserDto;
 import ni.com.userApi.persistencia.Usuario;
-import ni.com.userApi.dto.Token;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

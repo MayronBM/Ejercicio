@@ -1,8 +1,7 @@
 package ni.com.userApi.servicio.servicio;
 
-import ni.com.userApi.persistencia.Usuario;
-
 import java.util.Optional;
+import ni.com.userApi.persistencia.Usuario;
 
 public interface UserService {
   Usuario guardar(Usuario usuario);
