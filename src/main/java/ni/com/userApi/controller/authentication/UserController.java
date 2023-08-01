@@ -14,14 +14,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("usuarios")
 @Getter
 @Setter
-@Tag(name = "User", description = "Registro y Login de usuarrios")
+@Tag(name = "Usuarios", description = "Registro y Login de usuarios")
 public class UserController {
 
   private UserService userService;
@@ -35,8 +35,9 @@ public class UserController {
     this.userMapper = userMapper;
   }
 
-  @PostMapping("/guardar")
-  public ResponseEntity<?> postUser(@RequestBody UserDto userDto) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.CREATED)
+  public UserDto postUser(@RequestBody UserDto userDto) {
     if (!EmailValidator.getInstance().isValid(userDto.getEmail())) {
       throw new UserException("Debe agregar un correo válido.");
     }
@@ -45,11 +46,12 @@ public class UserController {
     usuario = userService.guardar(usuario);
     Token token = generatorJwt.crearToken(usuario);
 
-    return new ResponseEntity<>(userMapper.convertirGuardar(usuario, token), HttpStatus.CREATED);
+    return userMapper.convertirGuardar(usuario, token);
   }
 
-  @PostMapping("/login")
-  public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) throws Exception {
+  @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public Token loginUser(@RequestBody UserDto userDto) {
     Usuario usuario = userMapper.convertir(userDto);
 
     if (StringUtils.isEmpty(usuario.getEmail()) || StringUtils.isEmpty(usuario.getClave())) {
@@ -58,7 +60,7 @@ public class UserController {
 
     return userService
         .obtenerUsuarioPorEmailClave(usuario.getEmail(), usuario.getClave())
-        .map(usuarioBd -> new ResponseEntity<>(generatorJwt.crearToken(usuario), HttpStatus.OK))
-        .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
+        .map(usuarioBd -> generatorJwt.crearToken(usuario))
+        .orElseThrow();
   }
 }

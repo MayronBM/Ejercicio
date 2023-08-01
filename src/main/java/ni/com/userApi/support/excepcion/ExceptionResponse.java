@@ -33,7 +33,7 @@ public class ExceptionResponse implements Serializable {
   }
 
   private String mensajeSqlException(SQLException ex) {
-    String msg = "Error code: %s, Cause: %s";
+    String msg = "Error code: %d, Cause: %s";
     if (ex.getErrorCode() == 23505 && ex.getMessage().contains("UK_POST_EMAIL")) {
       return "El email se encuentra asignado a otro usuario.";
     } else {

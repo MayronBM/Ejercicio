@@ -17,7 +17,7 @@ public class Configuration {
   public FilterRegistrationBean jwtFilter() {
     FilterRegistrationBean filter = new FilterRegistrationBean();
     filter.setFilter(new Filter(secret));
-    filter.addUrlPatterns("/blog/restricted");
+    filter.addUrlPatterns("/pruebas/seguro");
     return filter;
   }
 }
